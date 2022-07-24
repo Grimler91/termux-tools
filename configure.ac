@@ -95,6 +95,9 @@ AC_SUBST(termux_package_manager)
 AC_PROG_LN_S
 
 AC_CONFIG_FILES([Makefile scripts/Makefile doc/Makefile
-mirrors/Makefile motds/Makefile src/Makefile])
+mirrors/Makefile motds/Makefile src/Makefile tests/Makefile])
+
+AC_CONFIG_TESTDIR(tests)
+AM_MISSING_PROG([AUTOM4TE], [autom4te])
 
 AC_OUTPUT
