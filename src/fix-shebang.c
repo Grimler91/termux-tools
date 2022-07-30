@@ -35,6 +35,27 @@ along with termux-tools.  If not, see
 
 bool verbose = false;
 
+int replace_file(char *new_file, char *shebang, char *buf)
+{
+	char error_message[ERR_LEN] = {'\0'};
+	if (verbose) {
+		printf(("%s: failed to atomically replace %s. "
+			"Writing directly to it instead.\n"),
+		       PACKAGE_NAME, new_file);
+	}
+	FILE *fp = fopen(new_file, "w");
+	if (!fp) {
+		if (snprintf(error_message, ERR_LEN-1, "fopen(\"%s\")",
+			     new_file) < 0)
+			strncpy(error_message, "fopen()", ERR_LEN-1);
+		perror(error_message);
+		return 1;
+	}
+	fprintf(fp, "%s%s", shebang, buf);
+	fclose(fp);
+	return 0;
+}
+
 int check_shebang(char *filename, regex_t shebang_regex)
 {
 	char error_message[ERR_LEN] = {'\0'};
@@ -106,12 +127,33 @@ int check_shebang(char *filename, regex_t shebang_regex)
 
 	fread(buf, 1, content_size, fp);
 	dprintf(new_fd, "%s", buf);
-	free(buf);
+	/* Do not free buffer just yet, we might want to use
+	   it to workaround 'rename' shortcomings */
 
 	fclose(fp);
 	close(new_fd);
 
-	if (rename(tmpfile, filename) < 0) {
+	int ret = rename(tmpfile, filename);
+	if (ret < 0 && errno == EXDEV) {
+		/* If TMPDIR is a tmpfs, or 'filename' is in a
+		   mounted storage, then rename will not work.
+		   Workaround this situation. */
+		if (remove(tmpfile) < 0) {
+			if (snprintf(error_message, ERR_LEN-1, "remove(\"%s\")",
+				     tmpfile) < 0)
+				strncpy(error_message, "remove()", ERR_LEN-1);
+			perror(error_message);
+			free(buf);
+			return 1;
+		}
+		char new_shebang[BINPRM_BUF_SIZE];
+		sprintf(new_shebang, "#!%s/bin/%s", TERMUX_PREFIX,
+			shebang_line + matches[2].rm_so);
+		if (replace_file(filename, new_shebang, buf) != 0) {
+			free(buf);
+			return 1;
+		}
+	} else if (ret < 0) {
 		if (snprintf(error_message, ERR_LEN-1, "rename(\"%s\", \"%s\")",
 			     tmpfile, filename) < 0)
 			strncpy(error_message, "rename()", ERR_LEN-1);
@@ -119,6 +161,7 @@ int check_shebang(char *filename, regex_t shebang_regex)
 		free(buf);
 		return 1;
 	}
+	free(buf);
 	return 0;
 }
 
