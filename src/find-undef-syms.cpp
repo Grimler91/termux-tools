@@ -20,8 +20,9 @@ You should have received a copy of the GNU General Public License
 along with termux-tools.  If not, see
 <https://www.gnu.org/licenses/>.  */
 
-#include <elf.h>
 #include <fcntl.h>
+#include <gelf.h>
+#include <libelf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -56,47 +57,19 @@ Options:\n\
 --version             output version information and exit\n"
 };
 
-template<typename ElfWord /*Elf{32_Word,64_Xword}*/,
-	 typename ElfHeaderType /*Elf{32,64}_Ehdr*/,
-	 typename ElfSectionHeaderType /*Elf{32,64}_Shdr*/,
-	 typename ElfDynamicSectionEntryType /* Elf{32,64}_Dyn */>
-bool check_symbols(uint8_t* bytes, size_t elf_file_size, char const* file_name)
-{
-	if (sizeof(ElfSectionHeaderType) > elf_file_size) {
-		fprintf(stderr, "%s: Elf header for '%s' would end at %zu but file size only %zu\n",
-			PACKAGE_NAME, file_name, sizeof(ElfSectionHeaderType), elf_file_size);
-		return false;
-	}
-	ElfHeaderType* elf_hdr = reinterpret_cast<ElfHeaderType*>(bytes);
-
-	size_t last_section_header_byte = elf_hdr->e_shoff + sizeof(ElfSectionHeaderType) * elf_hdr->e_shnum;
-	if (last_section_header_byte > elf_file_size) {
-		fprintf(stderr, "%s: Section header for '%s' would end at %zu but file size only %zu\n",
-			PACKAGE_NAME, file_name, last_section_header_byte, elf_file_size);
-		return false;
-	}
-	ElfSectionHeaderType* section_header_table = reinterpret_cast<ElfSectionHeaderType*>(bytes + elf_hdr->e_shoff);
-
-	/* Iterate over section headers */
-	for (unsigned int i = 1; i < elf_hdr->e_shnum; i++) {
-		ElfSectionHeaderType* section_header_entry = section_header_table + i;
-		if (section_header_entry->sh_type == SHT_SYMTAB) {
-			size_t const last_dynamic_section_byte = section_header_entry->sh_offset + section_header_entry->sh_size;
-			if (last_dynamic_section_byte > elf_file_size) {
-				fprintf(stderr, "%s: Dynamic section for '%s' would end at %zu but file size only %zu\n",
-					PACKAGE_NAME, file_name, last_dynamic_section_byte, elf_file_size);
-				return false;
-			}
-
-			printf("sym: %u\n", section_header_entry->st_name);
-		}
-	}
-	return true;
-}
-
 int parse_file(const char *file_name)
 {
-	int fd = open(file_name, O_RDWR);
+	Elf *elf;
+	Elf_Scn *scn = NULL;
+	GElf_Shdr shdr;
+	Elf_Data *data;
+	GElf_Sym sym;
+	int fd, ii, count;
+	long unsigned int iterator_print = 0;
+
+	elf_version(EV_CURRENT);
+
+	fd = open(file_name, O_RDWR);
 	if (fd < 0) {
 		char* error_message;
 		if (asprintf(&error_message, "open(\"%s\")", file_name) == -1)
@@ -104,92 +77,30 @@ int parse_file(const char *file_name)
 		perror(error_message);
 		return 1;
 	}
+	elf = elf_begin(fd, ELF_C_READ, NULL);
 
-	struct stat st;
-	if (fstat(fd, &st) < 0) {
-		perror("fstat()");
-		if (close(fd) != 0)
-			perror("close()");
-		return 1;
-	}
-
-	if (st.st_size < (long long) sizeof(Elf32_Ehdr)) {
-		if (close(fd) != 0) {
-			perror("close()");
-			return 1;
+	while ((scn = elf_nextscn(elf, scn)) != NULL) {
+		gelf_getshdr(scn, &shdr);
+		if (shdr.sh_type == SHT_SYMTAB) {
+			/* found a symbol table, go print it. */
+			break;
 		}
-		return 0;
 	}
 
-	void* mem = mmap(0, st.st_size, PROT_READ | PROT_WRITE,
-			 MAP_SHARED, fd, 0);
-	if (mem == MAP_FAILED) {
-		perror("mmap()");
-		if (close(fd) != 0)
-			perror("close()");
-		return 1;
-	}
+	data = elf_getdata(scn, NULL);
+	count = shdr.sh_size / shdr.sh_entsize;
 
-	uint8_t* bytes = reinterpret_cast<uint8_t*>(mem);
-	if (!(bytes[0] == 0x7F && bytes[1] == 'E' &&
-	      bytes[2] == 'L' && bytes[3] == 'F')) {
-		// Not the ELF magic number.
-		munmap(mem, st.st_size);
-		if (close(fd) != 0) {
-			perror("close()");
-			return 1;
-		}
-		return 0;
-	}
+	/* print the symbol names */
+	for (ii = 0; ii < count; ++ii) {
+		iterator_print++;
+		gelf_getsym(data, ii, &sym);
 
-	if (bytes[/*EI_DATA*/5] != 1) {
-		fprintf(stderr, "%s: Not little endianness in '%s'\n",
-			PACKAGE_NAME, file_name);
-		munmap(mem, st.st_size);
-		if (close(fd) != 0) {
-			perror("close()");
-			return 1;
-		}
-		return 0;
+		if ((sym.st_info & 0xf) == 0 && sym.st_info >> 4 == 1)
+			printf("%s has undefined symbol %s\n", file_name, elf_strptr(elf, shdr.sh_link, sym.st_name));
 	}
-
-	uint8_t const bit_value = bytes[/*EI_CLASS*/4];
-	if (bit_value == 1) {
-		if (!check_symbols<Elf32_Word, Elf32_Ehdr, Elf32_Shdr,
-		    Elf32_Dyn>(bytes, st.st_size, file_name)) {
-			munmap(mem, st.st_size);
-			if (close(fd) != 0)
-				perror("close()");
-			return 1;
-		}
-	} else if (bit_value == 2) {
-		if (!check_symbols<Elf64_Xword, Elf64_Ehdr, Elf64_Shdr,
-		    Elf64_Dyn>(bytes, st.st_size, file_name)) {
-			munmap(mem, st.st_size);
-			if (close(fd) != 0)
-				perror("close()");
-			return 1;
-		}
-	} else {
-		fprintf(stderr, "%s: Incorrect bit value %d in '%s'\n",
-			PACKAGE_NAME, bit_value, file_name);
-		munmap(mem, st.st_size);
-		if (close(fd) != 0)
-			perror("close()");
-		return 1;
-	}
-
-	if (msync(mem, st.st_size, MS_SYNC) < 0) {
-		perror("msync()");
-		munmap(mem, st.st_size);
-		if (close(fd) != 0)
-			perror("close()");
-		return 1;
-	}
-
-	munmap(mem, st.st_size);
+	elf_end(elf);
 	close(fd);
-	return 0;
+        return 0;
 }
 
 int main(int argc, char **argv)

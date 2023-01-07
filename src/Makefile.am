@@ -23,3 +23,4 @@ bin_PROGRAMS = termux-fix-shebang find-undef-syms
 termux_fix_shebang_SOURCES = fix-shebang.c arghandling.c
 
 find_undef_syms_SOURCES = find-undef-syms.cpp arghandling.c
+find_undef_syms_LDADD = -lelf
