@@ -1,8 +1,6 @@
 /* find-undef-syms
 
-Partly based on termux-elf-cleaner:
-Copyright (C) 2017 Fredrik Fornwall
-Copyright (C) 2022 Termux
+Copyright (C) 2023 Termux
 
 This file is part of termux-tools.
 
@@ -64,8 +62,7 @@ int parse_file(const char *file_name)
 	GElf_Shdr shdr;
 	Elf_Data *data;
 	GElf_Sym sym;
-	int fd, ii, count;
-	long unsigned int iterator_print = 0;
+	int fd, index, count;
 
 	elf_version(EV_CURRENT);
 
@@ -77,6 +74,7 @@ int parse_file(const char *file_name)
 		perror(error_message);
 		return 1;
 	}
+
 	elf = elf_begin(fd, ELF_C_READ, NULL);
 
 	while ((scn = elf_nextscn(elf, scn)) != NULL) {
@@ -91,12 +89,12 @@ int parse_file(const char *file_name)
 	count = shdr.sh_size / shdr.sh_entsize;
 
 	/* print the symbol names */
-	for (ii = 0; ii < count; ++ii) {
-		iterator_print++;
-		gelf_getsym(data, ii, &sym);
+	for (index = 0; index < count; ++index) {
+		gelf_getsym(data, index, &sym);
 
 		if ((sym.st_info & 0xf) == 0 && sym.st_info >> 4 == 1)
-			printf("%s has undefined symbol %s\n", file_name, elf_strptr(elf, shdr.sh_link, sym.st_name));
+			printf("%s contains undefined symbols: %s\n", file_name,
+			       elf_strptr(elf, shdr.sh_link, sym.st_name));
 	}
 	elf_end(elf);
 	close(fd);
@@ -105,15 +103,6 @@ int parse_file(const char *file_name)
 
 int main(int argc, char **argv)
 {
-	/*
-	  1. Create list of symbols in Makefile with:
-	    SYMBOLS="$(llvm-readelf -s $($TERMUX_HOST_PLATFORM-clang -print-libgcc-file-name) | grep "FUNC    GLOBAL HIDDEN" | awk '{print $8}')"
-	    SYMBOLS+=" $(echo libandroid_{sem_{open,close,unlink},shm{ctl,get,at,dt}})"
-	  and sed it in a header to create a vector/array during compile time
-	  2. Loop over input files, see if they are libraries
-	  3. See if they have any symbols matching "NOTYPE  GLOBAL DEFAULT  UND", and where symbol is one of the ones in symbol-list from above
-	 */
-
 	int skip_args = 0;
 	if (argc == 1 || argmatch(argv, argc, "-help", "--help", 3, NULL, &skip_args)) {
 		printf("Usage: %s [OPTION-OR-FILENAME]...\n", argv[0]);
