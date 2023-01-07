@@ -1,0 +1,111 @@
+# Process this file with autom4te to create testsuite. -*- Autotest -*-
+
+# Test suite for find-undef-syms.
+# Copyright 2023 Termux
+
+# This file is part of termux-tools.
+
+# termux-tools is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+
+# termux-tools is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see
+# <http://www.gnu.org/licenses/>.
+
+AT_BANNER([find-undef-syms])
+
+AT_SETUP([undefined __extenddftf2])
+AT_KEYWORDS([undefined-symbols])
+AT_CHECK([cp ${top_srcdir}/tests/libtest.so .
+${abs_top_builddir}/src/find-undef-syms libtest.so],
+[0],
+[libtest.so has undefined symbol __extenddftf2
+])
+AT_CLEANUP
+
+AT_SETUP([aarch64 sem-symbols])
+AT_KEYWORDS([aarch64])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-aarch64-libmpi.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-aarch64-libmpi.so],
+[0],
+[openmpi-4.1.1-aarch64-libmpi.so has undefined symbol libandroid_sem_close
+openmpi-4.1.1-aarch64-libmpi.so has undefined symbol libandroid_sem_open
+openmpi-4.1.1-aarch64-libmpi.so has undefined symbol libandroid_sem_unlink
+])
+AT_CLEANUP
+
+AT_SETUP([arm sem-symbols])
+AT_KEYWORDS([arm])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-arm-libmpi.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-arm-libmpi.so],
+[0],
+[openmpi-4.1.1-arm-libmpi.so has undefined symbol libandroid_sem_close
+openmpi-4.1.1-arm-libmpi.so has undefined symbol libandroid_sem_open
+openmpi-4.1.1-arm-libmpi.so has undefined symbol libandroid_sem_unlink
+])
+AT_CLEANUP
+
+AT_SETUP([i686 sem-symbols])
+AT_KEYWORDS([i686])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-i686-libmpi.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-i686-libmpi.so],
+[0],
+[openmpi-4.1.1-i686-libmpi.so has undefined symbol libandroid_sem_close
+openmpi-4.1.1-i686-libmpi.so has undefined symbol libandroid_sem_open
+openmpi-4.1.1-i686-libmpi.so has undefined symbol libandroid_sem_unlink
+])
+AT_CLEANUP
+
+AT_SETUP([x86_64 sem-symbols])
+AT_KEYWORDS([x86_64])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-x86_64-libmpi.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-x86_64-libmpi.so],
+[0],
+[openmpi-4.1.1-x86_64-libmpi.so has undefined symbol libandroid_sem_close
+openmpi-4.1.1-x86_64-libmpi.so has undefined symbol libandroid_sem_open
+openmpi-4.1.1-x86_64-libmpi.so has undefined symbol libandroid_sem_unlink
+])
+AT_CLEANUP
+
+AT_SETUP([aarch64 shm-symbols])
+AT_KEYWORDS([aarch64])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-aarch64-libopen-pal.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-aarch64-libopen-pal.so],
+[0],
+[openmpi-4.1.1-aarch64-libopen-pal.so has undefined symbol libandroid_shmctl
+])
+AT_CLEANUP
+
+AT_SETUP([arm shm-symbols])
+AT_KEYWORDS([arm])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-arm-libopen-pal.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-arm-libopen-pal.so],
+[0],
+[openmpi-4.1.1-arm-libopen-pal.so has undefined symbol libandroid_shmctl
+])
+AT_CLEANUP
+
+AT_SETUP([i686 shm-symbols])
+AT_KEYWORDS([i686])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-i686-libopen-pal.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-i686-libopen-pal.so],
+[0],
+[openmpi-4.1.1-i686-libopen-pal.so has undefined symbol libandroid_shmctl
+])
+AT_CLEANUP
+
+AT_SETUP([x86_64 shm-symbols])
+AT_KEYWORDS([x86_64])
+AT_CHECK([cp ${top_srcdir}/tests/openmpi-4.1.1-x86_64-libopen-pal.so .
+${abs_top_builddir}/src/find-undef-syms openmpi-4.1.1-x86_64-libopen-pal.so],
+[0],
+[openmpi-4.1.1-x86_64-libopen-pal.so has undefined symbol libandroid_shmctl
+])
+AT_CLEANUP

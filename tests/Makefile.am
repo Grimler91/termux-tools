@@ -18,7 +18,7 @@
 # along with this program.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-TESTSUITE_FRAGMENTS = fix-shebang.at
+TESTSUITE_FRAGMENTS = fix-shebang.at find-undef-syms.at
 
 EXTRA_DIST = $(TESTSUITE_AT) testsuite package.m4
 
