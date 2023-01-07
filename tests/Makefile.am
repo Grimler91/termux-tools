@@ -18,7 +18,7 @@
 # along with this program.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-TESTSUITE_FRAGMENTS =
+TESTSUITE_FRAGMENTS = fix-shebang.at
 
 EXTRA_DIST = $(TESTSUITE_AT) testsuite package.m4
 
@@ -43,7 +43,7 @@ $(srcdir)/package.m4: $(top_srcdir)/configure.ac
 ## Test suite.  ##
 ## ------------ ##
 
-TESTSUITE_AT =
+TESTSUITE_AT = termux-tools.at
 
 TESTSUITE = $(builddir)/testsuite
 
