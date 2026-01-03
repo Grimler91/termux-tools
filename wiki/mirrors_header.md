@@ -46,4 +46,4 @@ There are listed all known Termux mirrors. If you hosted one but didn't find it 
 
 ### Mirrors that are part of mirror rotation in pkg
 
-These mirrors (listed alphabetically) might be picked, on random, when pkg checks available mirrors and picks one.
+These mirrors might be picked, on random, when pkg checks available mirrors and picks one. If termux-change-repo has been used to select only a single group of mirrors, then only the mirrors in that subsection are used.
