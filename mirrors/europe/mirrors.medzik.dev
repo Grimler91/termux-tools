@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by M3DZIK. Hosted in Frankfurt, Germany.
+# Mirror by M3DZIK. Frankfurt, Germany.
+# M3DZIK | https://github.com/M3DZIK
+# Hosted in Frankfurt, Germany, Updated every 15 minutes. 4Gbp/s and is IPV4 only.
 WEIGHT=1
 MAIN="https://mirrors.medzik.dev/termux/termux-main"
 ROOT="https://mirrors.medzik.dev/termux/termux-root"

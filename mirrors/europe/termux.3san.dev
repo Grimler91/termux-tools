@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Exosunandnet. Hosted in Spain.
+# Mirror by Exosunandnet. Spain.
+# Exosunandnet | https://github.com/Exosunandnet
+# Hosted in Spain. Updated every 6 hours. 1Gb/s and is IPv4 only.
 WEIGHT=1
 MAIN="https://termux.3san.dev/termux/termux-main"
 ROOT="https://termux.3san.dev/termux/termux-root"

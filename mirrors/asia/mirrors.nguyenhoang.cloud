@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Nguyen Hoang. Hosted in Hanoi, Vietnam.
+# Mirror by Nguyen Hoang. Hanoi, Vietnam.
+# Nguyen Hoang | https://github.com/HoangTheBoss
+# Hosted in Hanoi, Vietnam. Update Twice a day, 1Gbp/s and support IPV4 only.
 WEIGHT=1
 MAIN="https://mirrors.nguyenhoang.cloud/termux/termux-main"
 ROOT="https://mirrors.nguyenhoang.cloud/termux/termux-root"

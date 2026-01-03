@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by University of Science and Technology of China / ustclug. Hosted in China.
+# Mirror by USTC LUG. China.
+# Linux User Group at University of Science and Technology of China | https://lug.ustc.edu.cn/
+# 
 WEIGHT=1
 MAIN="https://mirrors.ustc.edu.cn/termux/termux-main"
 ROOT="https://mirrors.ustc.edu.cn/termux/termux-root"

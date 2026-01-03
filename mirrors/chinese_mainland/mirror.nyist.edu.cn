@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Nanyang Institute of Technology. Hosted in China.
+# Mirror by NYIST. China.
+# Nanyang Institute of Technology | https://mirror.nyist.edu.cn/
+# 
 WEIGHT=1
 MAIN="https://mirror.nyist.edu.cn/termux/apt/termux-main"
 ROOT="https://mirror.nyist.edu.cn/termux/apt/termux-root"

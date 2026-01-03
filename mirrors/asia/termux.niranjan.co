@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Niranjan Fartare. Hosted in Mumbai, India.
+# Mirror by Niranjan. Mumbai, India.
+# Niranjan Fartare | https://niranjan.co/
+# This mirror is hosted in Mumbai, India, updated every 30 minutes, 500Mbp/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://termux.niranjan.co/termux-main"
 ROOT="https://termux.niranjan.co/termux-root"

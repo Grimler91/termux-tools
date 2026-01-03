@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Shandong University. Hosted in China.
+# Mirror by Shandong University. China.
+# Shandong University | https://mirrors.sdu.edu.cn/
+# 
 WEIGHT=1
 MAIN="https://mirrors.sdu.edu.cn/termux/termux-main"
 ROOT="https://mirrors.sdu.edu.cn/termux/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by MeowIce. Hosted in Ho Chi Minh, Vietnam.
+# Mirror by MeowIce. Ho Chi Minh City, Vietnam.
+# MeowIce | https://github.com/MeowIce
+# Hosted in Ho Chi Minh, Vietnam. Update hourly, 500mbps ~ 1Gbp/s and support IPV4/IPV6 and HTTP/HTTPS/RSYNC. RSYNC link: `rsync://rsync.meowsmp.net/termux`.
 WEIGHT=1
 MAIN="https://mirror.meowsmp.net/termux/termux-main"
 ROOT="https://mirror.meowsmp.net/termux/termux-root"

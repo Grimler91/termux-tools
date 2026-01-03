@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Bombyeol. Hosted in Daegu, Republic of Korea.
+# Mirror by Bombyeol. Daegu, Republic of Korea.
+# Bombyeol | https://github.com/Senarin
+# Hosted in Daegu, South Korea. Updated every 4 hours. 1Gb/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://mirror.rinarin.dev/termux/termux-main"
 ROOT="https://mirror.rinarin.dev/termux/termux-root"

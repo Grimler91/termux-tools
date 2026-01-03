@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Chongqing University of Posts and Telecommunications (CQUPT). Hosted in China.
+# Mirror by CQUPT. China.
+# Chongqing University of Posts and Telecommunications | https://cqupt.edu.cn/
+# More info at https://mirrors.cqupt.edu.cn/.
 WEIGHT=1
 MAIN="https://mirrors.cqupt.edu.cn/termux/termux-main"
 ROOT="https://mirrors.cqupt.edu.cn/termux/termux-root"
