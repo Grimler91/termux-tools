@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by eScience Center in Nanjing University. Hosted in China.
+# Mirror by eScience Center in Nanjing University. Nanjing, China.
+# eScience Center in Nanjing University | https://www.nju.edu.cn/
+# 
 WEIGHT=1
 MAIN="https://mirrors.nju.edu.cn/termux/apt/termux-main"
 ROOT="https://mirrors.nju.edu.cn/termux/apt/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Albonycal. Hosted in India.
+# Mirror by Albonycal. India.
+# Albonycal | https://github.com/Albonycal
+# This mirror is hosted in India, Updated every 53 minutes.
 WEIGHT=1
 MAIN="https://mirror.nag.albony.in/termux/termux-main"
 ROOT="https://mirror.nag.albony.in/termux/termux-root"

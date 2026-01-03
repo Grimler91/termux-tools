@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Academic Computer Club in Umeå. Hosted in Sweden.
+# Mirror by ACC. Umeå, Sweden.
+# Academic Computer Club in Umeå | https://accum.se
+# Hosted in Umeå, Sweden. Updated every four hours.
 WEIGHT=1
 MAIN="https://mirror.accum.se/mirror/termux.dev/termux-main"
 ROOT="https://mirror.accum.se/mirror/termux.dev/termux-root"

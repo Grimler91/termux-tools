@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Shanghai Jiao Tong University (@truc0). Hosted in China.
+# Mirror by SJTUG. Shanghai, China.
+# Shanghai Jiao Tong University *NIX User Group | https://sjtug.org/
+# Hosted in Shanghai, China. Updated once per 2 hours, 1Gb/s with IPv4/IPv6 support.
 WEIGHT=1
 MAIN="https://mirror.sjtu.edu.cn/termux/termux-main/"
 ROOT="https://mirror.sjtu.edu.cn/termux/termux-root/"

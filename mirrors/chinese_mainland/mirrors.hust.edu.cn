@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Huazhong University of Science and Technology. Hosted in China.
+# Mirror by HUST. Wuhan, Hubei, China.
+# Huazhong University of Science and Technology | https://mirrors.hust.edu.cn/
+# Hosted in Wuhan, Hubei, China. Updated every 2 hours. 1Gbp/s and support IPV4 and IPV6.
 WEIGHT=1
 MAIN="https://mirrors.hust.edu.cn/termux/apt/termux-main"
 ROOT="https://mirrors.hust.edu.cn/termux/apt/termux-root"

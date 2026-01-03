@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Utermux. Hosted in San Jose, California, US.
+# Mirror by Utermux. Los Angeles, California, US.
+# Utermux | https://github.com/utermuxblog
+# Hosted in Los Angeles, California, USA. Updated daily. 1Gb/s and support IPV4/IPV6. More info at https://github.com/UtermuxBlog/Issue.
 WEIGHT=1
 MAIN="https://mirrors.utermux.dev/termux/termux-main"
 ROOT="https://mirrors.utermux.dev/termux/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Andriy Utkin. Hosted in Cambridge, UK.
+# Mirror by Andriy Utkin. Cambridge, UK.
+# Andriy Utkin | https://autkin.net/
+# Hosted in Cambridge, UK. Updated nightly, 2MB/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://mirror.autkin.net/termux/termux-main"
 ROOT="https://mirror.autkin.net/termux/termux-root"

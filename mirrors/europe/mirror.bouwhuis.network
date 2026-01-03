@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by bouwhuis.network. Hosted in Amsterdam, Netherlands.
+# Mirror by bouwhuis.network. Amsterdam, Netherlands.
+# bouwhuis.network | https://bouwhuis.network/
+# Hosted in Amsterdam, NL. Updated every 6 hours, 10Gbp/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://mirror.bouwhuis.network/termux/termux-main"
 ROOT="https://mirror.bouwhuis.network/termux/termux-root"

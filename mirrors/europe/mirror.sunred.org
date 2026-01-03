@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by SunRed. Hosted in Falkenstein, Germany.
+# Mirror by SunRed. Falkenstein, Germany.
+# SunRed | https://sunred.org/
+# Hosted in Falkenstein, Germany. Updated once per 2 hours, 1Gbp/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://mirror.sunred.org/termux/termux-main"
 ROOT="https://mirror.sunred.org/termux/termux-root"

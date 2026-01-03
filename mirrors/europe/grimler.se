@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by grimler. Hosted in Netherlands.
+# Mirror by grimler. Helsinki, Finland.
+# grimler | https://github.com/grimler91
+# Hosted in Helsinki, Finland. Mirrored from the main node, updated hourly.
 WEIGHT=4
 MAIN="https://grimler.se/termux/termux-main"
 ROOT="https://grimler.se/termux/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by AG DSN. Hosted in Dresden, Germany.
+# Mirror by AG DSN. Dresden, Germany.
+# AG DSN in Dresden | https://agdsn.de
+# Updated daily.
 WEIGHT=1
 MAIN="https://ftp.agdsn.de/termux/termux-main"
 ROOT="https://ftp.agdsn.de/termux/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Taiwan Digital Streaming Co. Hosted in Taiwan.
+# Mirror by TWDS. Taiwan.
+# Taiwan Digital Streaming Co | https://www.twds.com.tw/
+# Hosted in Taiwan. Updated every 3 hours, 20 Gbps (80 Gbps for peers) and support IPV4/IPV6/RSYNC.
 WEIGHT=1
 MAIN="https://mirror.twds.com.tw/termux/termux-main"
 ROOT="https://mirror.twds.com.tw/termux/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by FlokiNET. Hosted in Reykjavík, Iceland.
+# Mirror by FlokiNET. Reykjavík, Iceland.
+# FlokiNET | https://flokinet.is/
+# This mirror is hosted in Reykjavík in Iceland. Updated once per day. 1Gbp/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://is.mirror.flokinet.net/termux/termux-main"
 ROOT="https://is.mirror.flokinet.net/termux/termux-root"

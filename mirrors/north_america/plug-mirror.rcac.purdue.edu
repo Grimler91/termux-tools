@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Purdue Linux User Group. Hosted in US.
+# Mirror by PLUG. Indiana, US.
+# Purdue Linux User Group | https://plug-mirror.rcac.purdue.edu/info.html
+# Hosted in Indiana, USA. Updated four times per day.
 WEIGHT=1
 MAIN="https://plug-mirror.rcac.purdue.edu/termux/termux-main"
 ROOT="https://plug-mirror.rcac.purdue.edu/termux/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by FlokiNET. Hosted in Bucharest, Romania.
+# Mirror by FlokiNET. Bucharest, Romania.
+# FlokiNET | https://flokinet.is/
+# This mirror is hosted in Bucharest in Romania. Updated once per day. 1Gbp/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://ro.mirror.flokinet.net/termux/termux-main"
 ROOT="https://ro.mirror.flokinet.net/termux/termux-root"

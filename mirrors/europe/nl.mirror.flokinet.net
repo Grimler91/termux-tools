@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by FlokiNET. Hosted in Netherlands.
+# Mirror by FlokiNET. Netherlands.
+# FlokiNET | https://flokinet.is/
+# This mirror is hosted in the Netherlands. Updated once per day. 1Gbp/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://nl.mirror.flokinet.net/termux/termux-main"
 ROOT="https://nl.mirror.flokinet.net/termux/termux-root"

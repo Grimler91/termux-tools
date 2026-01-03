@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by KuronekoServer (@kuroneko6423). Hosted in Tokyo, Japan.
+# Mirror by kuroneko6423. Tokyo, Japan.
+# KuronekoServer | https://krnk.org/
+# Hosted in Tokyo, Japan. Updated every 4 hours, 10Gbps and support IPv4.
 WEIGHT=1
 MAIN="https://mirrors.krnk.org/apt/termux/termux-main"
 ROOT="https://mirrors.krnk.org/apt/termux/termux-root"

@@ -1,5 +1,7 @@
 # This file is sourced by pkg
-# Mirror by Sahil Dhiman. Hosted in Germany.
+# Mirror by Sahil Dhiman. Falkenstein, Germany.
+# sahilister | https://github.com/sahilister
+# Hosted in Falkenstein, Germany. Updated every 6 hours, 1Gbp/s and support IPV4/IPV6.
 WEIGHT=1
 MAIN="https://mirrors.de.sahilister.net/termux/termux-main"
 ROOT="https://mirrors.de.sahilister.net/termux/termux-root"
