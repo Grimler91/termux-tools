@@ -1,0 +1,43 @@
+name: Update termux-packages.wiki mirrors wiki page
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'mirrors/**'
+      - 'wiki/mirrors_header.md'
+
+jobs:
+  update-wiki:
+    runs-on: ubuntu-slim
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Clone termux-packages.wiki
+      run: |
+        if [ ! -d termux-packages.wiki ]; then
+          git clone https://github.com/termux/termux-packages.wiki.git
+          cd termux-packages.wiki
+        else
+          cd termux-packages.wiki
+          git pull origin master
+        fi
+        git config --global user.name "Termux Github Actions"
+        git config --global user.email "contact@termux.dev"
+
+    - name: Generate the Wiki page
+      run: |
+        cd termux-packages.wiki
+        bash ../mirrors/generate-wiki-page.sh
+
+    - name: Commit and push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cd termux-packages.wiki
+        git add Mirrors.md
+        git commit -m "Update Mirrors.md after commit ${GITHUB_SHA::12}"
+        git push origin master
