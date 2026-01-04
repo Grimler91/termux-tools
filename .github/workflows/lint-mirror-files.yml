@@ -15,10 +15,11 @@ jobs:
     runs-on: ubuntu-slim
 
     steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
     - name: Check mirror files
       run: |
-        pwd
-        ls
         for file in mirrors/default $(git ls-files mirrors/*/*); do
           if head -n 4 "$file" | grep -qv '^#'; then
             echo "Error: $file does not have 4 header lines starting with #" > /dev/stderr
