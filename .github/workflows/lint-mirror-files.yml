@@ -17,6 +17,8 @@ jobs:
     steps:
     - name: Check mirror files
       run: |
+        pwd
+        ls
         for file in mirrors/default mirrors/*/*; do
           echo "Checking $file..."
 
