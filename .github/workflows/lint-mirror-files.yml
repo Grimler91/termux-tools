@@ -1,0 +1,46 @@
+name: Lint mirror files
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'mirrors/**'
+  pull_request:
+    paths:
+      - 'mirrors/**'
+
+jobs:
+  verify-files:
+    runs-on: ubuntu-slim
+
+    steps:
+    - name: Check mirror files
+      run: |
+        for file in mirrors/default mirrors/*/*; do
+          echo "Checking $file..."
+
+          if head -n 4 "$mirror" | grep -qv '^#'; then
+            echo "Error: $mirror does not have 4 header lines starting with #" > /dev/stderr
+            exit 1
+          fi
+
+          if ! grep -q '^MAIN=' "$file"; then
+            echo "Error: $file does not contain MAIN" > /dev/stderr
+            exit 1
+          fi
+          if ! grep -q '^ROOT=' "$file"; then
+            echo "Error: $file does not contain ROOT" > /dev/stderr
+            exit 1
+          fi
+          if ! grep -q '^X11=' "$file"; then
+            echo "Error: $file does not contain X11" > /dev/stderr
+            exit 1
+          fi
+
+          if ! grep -q "$(basename $file)" mirrors/Makefile.am; then
+            echo "Error: $file is not listed in mirrors/Makefile.am"
+          fi
+
+          echo "$file passed validation."
+        done
