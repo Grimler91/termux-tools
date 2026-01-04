@@ -19,11 +19,9 @@ jobs:
       run: |
         pwd
         ls
-        for file in mirrors/default mirrors/*/*; do
-          echo "Checking $file..."
-
-          if head -n 4 "$mirror" | grep -qv '^#'; then
-            echo "Error: $mirror does not have 4 header lines starting with #" > /dev/stderr
+        for file in mirrors/default $(git ls-files mirrors/*/*); do
+          if head -n 4 "$file" | grep -qv '^#'; then
+            echo "Error: $file does not have 4 header lines starting with #" > /dev/stderr
             exit 1
           fi
 
