@@ -19,7 +19,7 @@ jobs:
     - name: Clone termux-packages.wiki
       run: |
         if [ ! -d termux-packages.wiki ]; then
-          git clone https://github.com/termux/termux-packages.wiki.git
+          git clone https://github.com/grimler91/termux-packages.wiki.git
           cd termux-packages.wiki
         else
           cd termux-packages.wiki
